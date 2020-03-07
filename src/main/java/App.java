@@ -1,6 +1,9 @@
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class App {
     static Logger log = LoggerFactory.getLogger(App.class);
 
@@ -17,6 +20,18 @@ public class App {
         bookshelf.add(book4);
 
         bookshelf.getBooks().forEach(book -> log.info(book.getTitle()));
+
+        System.out.println();
+        List<String> list = bookshelf.getBooks().stream()
+                .filter(t -> t.getPages() > 100)
+                .map(t -> t.getAuthor() + t.getTitle())
+                .collect(Collectors.toList());
+
+        System.out.println(list);
+        System.out.println();
+
+        List<Book> bookList = bookshelf.search("Stories");
+        System.out.println(bookList);
 
         System.out.println("\n\n****************************\n\n");
 
